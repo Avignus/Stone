@@ -3,9 +3,10 @@ import {Text, View} from 'react-native';
 import styles from './styles';
 // import SvgUri from 'react-native-svg-uri';
 import SVGBag from '../../assets/shopping-bag.svg';
-import {useStore} from '../../context/products-context';
+import useStore from '../../context/hooks/useStore';
 import {TouchableOpacity} from 'react-native';
 import HeaderBack from '../HeaderBack';
+
 type Props = {
   onPress?: () => void | undefined;
   height?: string;
@@ -16,7 +17,8 @@ const Header = (props: Props) => {
   // console.log(props);
   const {onPress, goBack} = props;
   const {state} = useStore();
-  const {cartItems} = state;
+  console.log({state});
+  const {cartItems, isTestingMode} = state;
   const cartCount =
     cartItems &&
     cartItems.reduce((total, cartItem) => total + cartItem.quantity, 0);
@@ -38,7 +40,11 @@ const Header = (props: Props) => {
           <Text style={{...styles.headerLabel, paddingLeft: paddingValue}}>
             {cartCount ? cartCount : ''}
           </Text>
-          {<SVGBag width={40} height={40} />}
+          {!isTestingMode && (
+            <View style={styles.svgContainer}>
+              <SVGBag />
+            </View>
+          )}
         </TouchableOpacity>
       </View>
     </View>

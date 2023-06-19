@@ -11,32 +11,31 @@ import {
   addCartItem,
 } from '../../../src/context/products-context';
 type Props = {
-  name: string;
-  id: string;
-  imgUrl: string;
-  quantity: number;
   cartItem: CartItem;
 };
 const CartItemComponent = (props: Props) => {
-  const {id, name, imgUrl, quantity, cartItem} = props;
-
+  const {cartItem} = props;
+  const {id, name, imgUrl, quantity} = cartItem;
   const {state, setState} = useStore();
-  const {cartItems} = state;
+
   const remove = () => {
+    const {cartItems} = state;
     const newCartItems = removeCartItem(cartItems, cartItem);
     setState({...state, cartItems: newCartItems});
   };
 
   const add = () => {
+    const {cartItems} = state;
     if (state) {
       const newCartItems = addCartItem(cartItems, {imgUrl, name, id});
       setState({...state, cartItems: newCartItems});
     }
   };
 
-  const clearCartItem = (cartItems: CartItem[], cartItemToClear: CartItem) =>
-    cartItems.filter(cartItem => cartItem.id !== cartItemToClear.id);
+  const clearCartItem = (cartItemsList: CartItem[], itemToClear: CartItem) =>
+    cartItemsList.filter(item => item.id !== itemToClear.id);
   const clear = () => {
+    const {cartItems} = state;
     if (state) {
       const newCartItems = clearCartItem(cartItems, cartItem);
       setState({...state, cartItems: newCartItems});

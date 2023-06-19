@@ -24,6 +24,10 @@ const styles = StyleSheet.create({
     top: '45%',
     paddingLeft: '29.8%',
   },
+  svgContainer: {
+    width: 40,
+    height: 40,
+  },
 });
 
 export default styles;

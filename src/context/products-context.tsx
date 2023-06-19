@@ -14,12 +14,14 @@ export type CartItem = {
 type ObjectToSet = {
   products: Product[];
   cartItems: CartItem[];
+  isTestingMode: boolean;
 };
 
 export interface IGetterAndSetter {
   state: {
     products: Product[];
     cartItems: CartItem[];
+    isTestingMode: boolean;
   };
   setState: (items: ObjectToSet) => void;
 }
@@ -30,7 +32,10 @@ type ContextProps = {
   children: JSX.Element;
 };
 
-export const addCartItem = (cartItems: Array<CartItem>, cartItemToAdd: any) => {
+export const addCartItem = (
+  cartItems: Array<CartItem>,
+  cartItemToAdd: CartItem,
+) => {
   const existingCartItem =
     cartItems && cartItems.find(cartItem => cartItem.id === cartItemToAdd.id);
   if (cartItems && existingCartItem) {
@@ -69,6 +74,7 @@ const StoreProvider = ({children}: ContextProps) => {
   const [state, setState] = useState<ObjectToSet>({
     products: [],
     cartItems: [],
+    isTestingMode: false,
   });
 
   useEffect(() => {

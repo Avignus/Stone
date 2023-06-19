@@ -17,14 +17,7 @@ const Cart = ({navigation}: StackScreenProps<any, any>) => {
         </View>
         <View style={styles.containerContent}>
           {cartItems.map(cartItem => (
-            <CartItemComponent
-              key={cartItem.id}
-              cartItem={cartItem}
-              id={cartItem.id}
-              name={cartItem.name}
-              imgUrl={cartItem.imgUrl}
-              quantity={cartItem.quantity}
-            />
+            <CartItemComponent key={cartItem.id} cartItem={cartItem} />
           ))}
         </View>
       </View>

@@ -17,10 +17,14 @@ const Home = ({navigation}: StackScreenProps<any, any>) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   if (state && state.products) {
+    const {cartItems} = state;
+    const handleNavigation = () => {
+      if (cartItems.length > 0) navigation.navigate('Cart');
+    };
     return (
       <ScrollView>
         <View style={styles.headerContainer}>
-          <Header onPress={() => navigation.navigate('Cart')} />
+          <Header onPress={handleNavigation} />
         </View>
         <View style={styles.container}>
           {state.products.map(product => (
